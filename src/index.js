@@ -38,7 +38,7 @@ const router = () => {
     logRed(`no match found for "${req.url}"`);
   };
 
-  const methods = supportedHttpMethods.forEach(method => {
+  supportedHttpMethods.forEach(method => {
     matcher[method.toLowerCase()] = (path, handler) => {
       if (!handler) {
         handler = path;
