@@ -1,0 +1,20 @@
+{
+  "name": "node-router",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "author": "Riccardo Coppola <ricca509@gmail.com>",
+  "license": "ISC",
+  "dependencies": {
+    "jest": "23.5.0",
+    "node-mocks-http": "1.7.0"
+  },
+  "jest": {
+    "roots": [
+      "<rootDir>/src"
+    ]
+  }
+}
