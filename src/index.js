@@ -23,8 +23,8 @@ const router = () => {
 
   const matcher = (req, res) => {
     var { pathname } = url.parse(req.url);
-    for (let [method, options] of routes.entries()) {
-      let { path, handler } = options;
+    for (let [path, options] of routes.entries()) {
+      let { handler, method } = options;
 
       if (method === req.method) {
         const match = path.test && path.test(pathname);
@@ -45,14 +45,25 @@ const router = () => {
         path = /.*/;
       }
 
-      routes.set(method, { path, handler });
+      routes.set(path, { handler, method });
     };
   });
 
-  return matcher;
+  return {
+    matcher,
+    routes() {
+      const configuredRoutes = [];
+      for (let [_, options] of routes.entries()) {
+        let { path, method } = options;
+        configuredRoutes.push(`${method}: ${path}`);
+      }
+
+      return configuredRoutes;
+    }
+  };
 }
 
 module.exports = {
-  router: router(),
+  router,
   supportedHttpMethods
 };
